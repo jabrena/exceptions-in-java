@@ -1,6 +1,39 @@
-# exceptions-in-java
+# Exceptions in Java
 
-![](docs/exceptions.png)
+**Checked Exceptions:**
+Checked exceptions are exceptions that are checked at compile-time. The Java compiler requires methods that can throw checked exceptions to either handle them within a try-catch block or declare them using the throws keyword in the method signature. This ensures that the programmer is aware of potential issues and has made provisions to handle them. Common examples of checked exceptions include IOException, SQLException, and ClassNotFoundException.
+
+**Unchecked Exceptions:**
+Unchecked exceptions, also known as runtime exceptions, are exceptions that are not checked at compile-time but rather at runtime. These exceptions extend the RuntimeException class. The Java compiler does not require methods to explicitly handle or declare unchecked exceptions. They typically indicate programming errors such as logic mistakes or improper use of an API. Examples include NullPointerException, ArrayIndexOutOfBoundsException, and IllegalArgumentException.
+
+![](docs/exceptions.gif)
+Source: https://web.deu.edu.tr/doc/oreily/java/langref/ch09_04.htm 
+
+![](./docs/exception-evolution.png)
+
+| JDK   | Checked exceptions | Unchecked exceptions |
+|-------|--------------------|----------------------|
+| JDK6  | 239                | 178                  |
+| JDK7  | 244                | 178                  |
+| JDK8  | 322                | 239                  |
+| JDK9  | 362                | 345                  |
+| JDK10 | 349                | 344                  |
+| JDK11 | 353                | 544                  |
+| JDK12 | 359                | 544                  |
+| JDK13 | 354                | 546                  |
+| JDK14 | 360                | 367                  |
+| JDK15 | 363                | 361                  |
+| JDK16 | 367                | 364                  |
+| JDK17 | 369                | 362                  |
+| JDK18 | 372                | 364                  |
+| JDK19 | 381                | 376                  |
+| JDK20 | 387                | 378                  |
+| JDK21 | 394                | 381                  |
+| JDK22 | 396                | 395                  |
+
+
+
+## How to build in local?
 
 ```bash
 git submodule add https://github.com/openjdk/jdk6
