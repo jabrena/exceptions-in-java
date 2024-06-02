@@ -1,3 +1,15 @@
 [submodule "jdk8"]
 	path = jdk8
 	url = https://github.com/openjdk/jdk8
+[submodule "jdk9"]
+	path = jdk9
+	url = https://github.com/openjdk/jdk9
+[submodule "jdk10"]
+	path = jdk10
+	url = https://github.com/openjdk/jdk10
+[submodule "jdk11"]
+	path = jdk11
+	url = https://github.com/openjdk/jdk11
+[submodule "jdk12"]
+	path = jdk12
+	url = https://github.com/openjdk/jdk12
