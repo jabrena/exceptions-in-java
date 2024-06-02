@@ -31,3 +31,21 @@
 [submodule "jdk16"]
 	path = jdk16
 	url = https://github.com/openjdk/jdk16
+[submodule "jdk17"]
+	path = jdk17
+	url = https://github.com/openjdk/jdk17
+[submodule "jdk18"]
+	path = jdk18
+	url = https://github.com/openjdk/jdk18
+[submodule "jdk19"]
+	path = jdk19
+	url = https://github.com/openjdk/jdk19
+[submodule "jdk20"]
+	path = jdk20
+	url = https://github.com/openjdk/jdk20
+[submodule "jdk21"]
+	path = jdk21
+	url = https://github.com/openjdk/jdk21
+[submodule "jdk22"]
+	path = jdk22
+	url = https://github.com/openjdk/jdk22

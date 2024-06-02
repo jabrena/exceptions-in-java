@@ -54,7 +54,6 @@ public class ExceptionCounterExample {
         final List<String> jdk16 = List.of("./jdk16/");
         var jdk16Results = playlistGenerator.countExceptions(jdk16);
 
-        /*
         final List<String> jdk17 = List.of("./jdk17/");
         var jdk17Results = playlistGenerator.countExceptions(jdk17);
 
@@ -73,8 +72,6 @@ public class ExceptionCounterExample {
         final List<String> jdk22 = List.of("./jdk22/");
         var jdk22Results = playlistGenerator.countExceptions(jdk22);
 
-         */
-
         //Results
         System.out.println(jdk6Results);
         System.out.println(jdk7Results);
@@ -87,14 +84,11 @@ public class ExceptionCounterExample {
         System.out.println(jdk14Results);
         System.out.println(jdk15Results);
         System.out.println(jdk16Results);
-        /*
         System.out.println(jdk17Results);
         System.out.println(jdk18Results);
         System.out.println(jdk19Results);
         System.out.println(jdk20Results);
         System.out.println(jdk21Results);
         System.out.println(jdk22Results);
-
-         */
     }
 }
