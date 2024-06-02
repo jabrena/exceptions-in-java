@@ -46,20 +46,24 @@ public class ExceptionCounter {
         };
 
         Function<List<String>, Long> countCheckedExceptions = param -> {
+            logger.info("Counting Checked Exceptions");
             return param
                 .stream()
                 .flatMap(getFilesFromPath)
                 .filter(Files::isRegularFile)
+                .filter(p -> p.getFileName().toString().contains("Exception.java"))
                 .filter(containsCheckedExceptionPattern)
                 //.peek(System.out::println)
                 .count();
         };
 
         Function<List<String>, Long> countUncheckedExceptions = param -> {
+            logger.info("Counting Unchecked Exceptions");
             return param
                 .stream()
                 .flatMap(getFilesFromPath)
                 .filter(Files::isRegularFile)
+                .filter(p -> p.getFileName().toString().contains("Exception.java"))
                 .filter(containsUncheckedExceptionPattern)
                 //.peek(System.out::println)
                 .count();

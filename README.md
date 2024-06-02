@@ -11,27 +11,25 @@ Source: https://web.deu.edu.tr/doc/oreily/java/langref/ch09_04.htm
 
 ![](./docs/exception-evolution.png)
 
-| JDK   | Checked exceptions | Unchecked exceptions |
+| JDK   | Checked Exceptions | Unchecked Exceptions |
 |-------|--------------------|----------------------|
-| JDK6  | 239                | 178                  |
-| JDK7  | 244                | 178                  |
-| JDK8  | 322                | 239                  |
-| JDK9  | 362                | 345                  |
-| JDK10 | 349                | 344                  |
-| JDK11 | 353                | 544                  |
-| JDK12 | 359                | 544                  |
-| JDK13 | 354                | 546                  |
-| JDK14 | 360                | 367                  |
-| JDK15 | 363                | 361                  |
-| JDK16 | 367                | 364                  |
-| JDK17 | 369                | 362                  |
-| JDK18 | 372                | 364                  |
-| JDK19 | 381                | 376                  |
-| JDK20 | 387                | 378                  |
-| JDK21 | 394                | 381                  |
-| JDK22 | 396                | 395                  |
-
-
+| JDK6  | 166                | 102                  |
+| JDK7  | 131                | 80                   |
+| JDK8  | 174                | 114                  |
+| JDK9  | 166                | 141                  |
+| JDK10 | 161                | 141                  |
+| JDK11 | 137                | 128                  |
+| JDK12 | 141                | 133                  |
+| JDK13 | 139                | 134                  |
+| JDK14 | 139                | 137                  |
+| JDK15 | 136                | 132                  |
+| JDK16 | 136                | 134                  |
+| JDK17 | 137                | 139                  |
+| JDK18 | 138                | 138                  |
+| JDK19 | 143                | 143                  |
+| JDK20 | 142                | 141                  |
+| JDK21 | 146                | 140                  |
+| JDK22 | 146                | 143                  |
 
 ## How to build in local?
 
@@ -47,7 +45,6 @@ git submodule add https://github.com/openjdk/jdk13
 git submodule add https://github.com/openjdk/jdk14
 git submodule add https://github.com/openjdk/jdk15
 git submodule add https://github.com/openjdk/jdk16
-
 git submodule add https://github.com/openjdk/jdk17
 git submodule add https://github.com/openjdk/jdk18
 git submodule add https://github.com/openjdk/jdk19
