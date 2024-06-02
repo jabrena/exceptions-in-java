@@ -45,7 +45,6 @@ git submodule add https://github.com/openjdk/jdk13
 git submodule add https://github.com/openjdk/jdk14
 git submodule add https://github.com/openjdk/jdk15
 git submodule add https://github.com/openjdk/jdk16
-
 git submodule add https://github.com/openjdk/jdk17
 git submodule add https://github.com/openjdk/jdk18
 git submodule add https://github.com/openjdk/jdk19
