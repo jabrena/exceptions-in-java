@@ -16,7 +16,7 @@ public class ExceptionCounter {
 
     private static final Logger logger = LoggerFactory.getLogger(ExceptionCounter.class);
 
-    record Counter(String jdk, Long checked, Long unchecked) {}
+    public record Counter(String jdk, Long checked, Long unchecked) {}
 
     public Counter countExceptions(List<String> paths) {
         Function<Path, String> loadFileFromGitModule = param -> {
@@ -51,7 +51,7 @@ public class ExceptionCounter {
                 .stream()
                 .flatMap(getFilesFromPath)
                 .filter(Files::isRegularFile)
-                .filter(p -> p.getFileName().toString().contains("Exception.java"))
+                .filter(p -> p.toString().contains("Exception.java"))
                 .filter(p -> !p.toString().contains("/test/"))
                 .filter(containsCheckedExceptionPattern)
                 .peek(System.out::println)
