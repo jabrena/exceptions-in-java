@@ -64,7 +64,6 @@ public class ExceptionCounter {
             logger.info("Retrieving Checked Exceptions");
             return param
                 .stream()
-                .parallel()
                 .flatMap(getFilesFromPath)
                 .filter(Files::isRegularFile)
                 .filter(isExceptionFile)
@@ -83,7 +82,6 @@ public class ExceptionCounter {
             logger.info("Retrieving Unchecked Exceptions");
             return param
                 .stream()
-                .parallel()
                 .flatMap(getFilesFromPath)
                 .filter(isExceptionFile)
                 .filter(not(isLocatedInTests))
