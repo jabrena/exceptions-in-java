@@ -22,6 +22,7 @@ java --list-modules
 git submodule update --init --recursive
 
 sdk env install
+./mvnw clean verify
 ./mvnw clean compile exec:java -Dexec.mainClass="info.jab.jdk.ExceptionCounterExample" -Dexec.args="--enable-preview"
 
 ./mvnw prettier:write
@@ -56,33 +57,8 @@ sdk env install
 | JDK21 | 120                | 122                  | 2    |
 | JDK22 | 120                | 122                  | 2    |
 
-## How to maintain the repo?
-
-```bash
-git submodule add https://github.com/openjdk/jdk6
-git submodule add https://github.com/openjdk/jdk7
-git submodule add https://github.com/openjdk/jdk8
-git submodule add https://github.com/openjdk/jdk9
-git submodule add https://github.com/openjdk/jdk10
-git submodule add https://github.com/openjdk/jdk11
-git submodule add https://github.com/openjdk/jdk12
-git submodule add https://github.com/openjdk/jdk13
-git submodule add https://github.com/openjdk/jdk14
-git submodule add https://github.com/openjdk/jdk15
-git submodule add https://github.com/openjdk/jdk16
-git submodule add https://github.com/openjdk/jdk17
-git submodule add https://github.com/openjdk/jdk18
-git submodule add https://github.com/openjdk/jdk19
-git submodule add https://github.com/openjdk/jdk20
-git submodule add https://github.com/openjdk/jdk21
-git submodule add https://github.com/openjdk/jdk22/tree/master
-
-//Create a script to load & unload submodules from openjdk
-git submodule deinit -f jdk21
-rm -rf jdk21
-...
-```
-
 ## References
 
+- https://github.com/openjdk/
+- https://github.com/openjdk/jdk
 - https://www.oracle.com/technical-resources/articles/enterprise-architecture/effective-exceptions-part1.html
