@@ -9,6 +9,7 @@ Exceptions in Java are represented by objects from classes that extend the Throw
 Handling exceptions properly is important for writing robust and maintainable Java programs. It helps in dealing with unexpected situations effectively and ensures that the program does not crash or terminate abruptly.
 
 ![](docs/exceptions.gif)
+
 Source: https://web.deu.edu.tr/doc/oreily/java/langref/ch09_04.htm 
 
 ```bash
@@ -35,27 +36,25 @@ sdk env install
 
 ![](./docs/exception-evolution.png)
 
-TODO: To be updated with latest improvements
-
-| JDK   | Checked Exceptions | Unchecked Exceptions |
-|-------|--------------------|----------------------|
-| JDK6  | 166                | 102                  |
-| JDK7  | 131                | 80                   |
-| JDK8  | 174                | 114                  |
-| JDK9  | 166                | 141                  |
-| JDK10 | 161                | 141                  |
-| JDK11 | 137                | 128                  |
-| JDK12 | 141                | 133                  |
-| JDK13 | 139                | 134                  |
-| JDK14 | 139                | 137                  |
-| JDK15 | 136                | 132                  |
-| JDK16 | 136                | 134                  |
-| JDK17 | 137                | 139                  |
-| JDK18 | 138                | 138                  |
-| JDK19 | 143                | 143                  |
-| JDK20 | 142                | 141                  |
-| JDK21 | 146                | 140                  |
-| JDK22 | 146                | 143                  |
+| JDK   | Checked Exceptions | Unchecked Exceptions | Diff |
+|-------|--------------------|----------------------|------|
+| JDK6  | 166                | 102                  | -64  |
+| JDK7  | 128                | 79                   | -49  |
+| JDK8  | 171                | 114                  | -57  |
+| JDK9  | 150                | 136                  | -14  |
+| JDK10 | 149                | 135                  | -14  |
+| JDK11 | 119                | 121                  | 2    |
+| JDK12 | 121                | 124                  | 3    |
+| JDK13 | 121                | 124                  | 3    |
+| JDK14 | 120                | 124                  | 4    |
+| JDK15 | 117                | 119                  | 2    |
+| JDK16 | 117                | 121                  | 4    |
+| JDK17 | 116                | 120                  | 4    |
+| JDK18 | 117                | 119                  | 2    |
+| JDK19 | 118                | 122                  | 4    |
+| JDK20 | 117                | 122                  | 5    |
+| JDK21 | 120                | 122                  | 2    |
+| JDK22 | 120                | 122                  | 2    |
 
 ## How to maintain the repo?
 
