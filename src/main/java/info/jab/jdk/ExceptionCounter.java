@@ -52,8 +52,9 @@ public class ExceptionCounter {
                 .flatMap(getFilesFromPath)
                 .filter(Files::isRegularFile)
                 .filter(p -> p.getFileName().toString().contains("Exception.java"))
+                .filter(p -> !p.toString().contains("/test/"))
                 .filter(containsCheckedExceptionPattern)
-                //.peek(System.out::println)
+                .peek(System.out::println)
                 .count();
         };
 
@@ -64,8 +65,9 @@ public class ExceptionCounter {
                 .flatMap(getFilesFromPath)
                 .filter(Files::isRegularFile)
                 .filter(p -> p.getFileName().toString().contains("Exception.java"))
+                .filter(p -> !p.toString().contains("/test/"))
                 .filter(containsUncheckedExceptionPattern)
-                //.peek(System.out::println)
+                .peek(System.out::println)
                 .count();
         };
 
