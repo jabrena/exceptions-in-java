@@ -1,11 +1,14 @@
 package info.jab.jdk;
 
+import static java.util.function.Predicate.not;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -45,30 +48,51 @@ public class ExceptionCounter {
             return loadFileFromGitModule.apply(param).contains(pattern);
         };
 
-        Function<List<String>, Long> countCheckedExceptions = param -> {
-            logger.info("Counting Checked Exceptions");
+        BiPredicate<Path, String> containsString = (path, pattern) -> path.toString().contains(pattern);
+
+        Predicate<Path> isExceptionFile = path -> {
+            final String pattern = "Exception.java";
+            return containsString.test(path, pattern);
+        };
+
+        Predicate<Path> isLocatedInTests = path -> {
+            final String pattern = "/test/";
+            return containsString.test(path, pattern);
+        };
+
+        Function<List<String>, List<Path>> checkedExceptionsList = param -> {
+            logger.info("Retrieving Checked Exceptions");
             return param
                 .stream()
                 .flatMap(getFilesFromPath)
                 .filter(Files::isRegularFile)
-                .filter(p -> p.toString().contains("Exception.java"))
-                .filter(p -> !p.toString().contains("/test/"))
+                .filter(isExceptionFile)
+                .filter(not(isLocatedInTests))
                 .filter(containsCheckedExceptionPattern)
                 .peek(System.out::println)
-                .count();
+                .toList();
+        };
+
+        Function<List<String>, Long> countCheckedExceptions = param -> {
+            logger.info("Counting Checked Exceptions");
+            return checkedExceptionsList.apply(paths).stream().count();
+        };
+
+        Function<List<String>, List<Path>> uncheckedExceptionsList = param -> {
+            logger.info("Retrieving Unchecked Exceptions");
+            return param
+                .stream()
+                .flatMap(getFilesFromPath)
+                .filter(isExceptionFile)
+                .filter(not(isLocatedInTests))
+                .filter(containsUncheckedExceptionPattern)
+                .peek(System.out::println)
+                .toList();
         };
 
         Function<List<String>, Long> countUncheckedExceptions = param -> {
             logger.info("Counting Unchecked Exceptions");
-            return param
-                .stream()
-                .flatMap(getFilesFromPath)
-                .filter(Files::isRegularFile)
-                .filter(p -> p.getFileName().toString().contains("Exception.java"))
-                .filter(p -> !p.toString().contains("/test/"))
-                .filter(containsUncheckedExceptionPattern)
-                .peek(System.out::println)
-                .count();
+            return uncheckedExceptionsList.apply(param).stream().count();
         };
 
         long startTime = System.currentTimeMillis();
