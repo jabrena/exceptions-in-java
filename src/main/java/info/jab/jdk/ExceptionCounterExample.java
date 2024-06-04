@@ -26,7 +26,7 @@ public class ExceptionCounterExample {
     }
 
     private static void showLatestData(ExceptionCounter counter) {
-        final List<String> jdk22 = List.of("./jdk22/");
+        final List<String> jdk22 = List.of("jdk22");
         var jdk22Results = counter.countExceptions(jdk22);
     }
 

@@ -56,6 +56,7 @@ sdk env install
 | JDK20 | 117                | 122                  | 5    |
 | JDK21 | 120                | 122                  | 2    |
 | JDK22 | 120                | 122                  | 2    |
+| JDK   | 120                | 121                  | 1    |
 
 ## References
 
