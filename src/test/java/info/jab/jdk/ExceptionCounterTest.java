@@ -4,13 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import info.jab.jdk.ExceptionCounter.ExceptionTypes;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 public class ExceptionCounterTest {
 
-    @Disabled
     @Test
     void should_countExceptions() {
         //Given
