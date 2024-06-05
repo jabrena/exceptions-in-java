@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
@@ -19,9 +18,9 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExceptionCounter {
+public class ExceptionFinder {
 
-    private static final Logger logger = LoggerFactory.getLogger(ExceptionCounter.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionFinder.class);
 
     public enum ExceptionTypes {
         CheckedException,
@@ -109,7 +108,7 @@ public class ExceptionCounter {
                 .filter(containsCheckedExceptionPattern)
                 .map(String::valueOf)
                 .map(str -> toExceptionDetail.apply(str, ExceptionTypes.CheckedException))
-                .peek(System.out::println)
+                //.peek(System.out::println)
                 .toList();
         };
 
@@ -123,33 +122,31 @@ public class ExceptionCounter {
                 .filter(containsUncheckedExceptionPattern)
                 .map(String::valueOf)
                 .map(str -> toExceptionDetail.apply(str, ExceptionTypes.UncheckedException))
-                .peek(System.out::println)
+                //.peek(System.out::println)
                 .toList();
         };
 
-        Consumer<String> stopWatch = param -> {
+        Function<List<String>, List<ExceptionDetail>> compute = param -> {
+            List<ExceptionDetail> counter1 = checkedExceptionsList.apply(param);
+            List<ExceptionDetail> counter2 = uncheckedExceptionsList.apply(param);
+            return Stream.concat(counter1.stream(), counter2.stream()).toList();
+        };
+
+        Function<List<String>, List<ExceptionDetail>> stopWatch = param -> {
             logger.info("Starting the process");
 
             long startTime = System.currentTimeMillis();
 
-            //process.accept();
+            var result = compute.apply(param);
 
             long stopTime = System.currentTimeMillis();
-            long elapsedTime = stopTime - startTime;
+            float elapsedTime = (stopTime - startTime) / 1000f;
 
-            logger.info("Computation time: {}", elapsedTime);
+            logger.info("Computation time: {} seconds", elapsedTime);
+
+            return result;
         };
 
-        long startTime = System.currentTimeMillis();
-
-        List<ExceptionDetail> counter1 = checkedExceptionsList.apply(paths);
-        List<ExceptionDetail> counter2 = uncheckedExceptionsList.apply(paths);
-
-        long stopTime = System.currentTimeMillis();
-        float elapsedTime = (stopTime - startTime) / 1000f;
-
-        logger.info("Computation time in {}: {} seconds", paths.get(0), elapsedTime);
-
-        return Stream.concat(counter1.stream(), counter2.stream()).toList();
+        return stopWatch.apply(paths);
     }
 }

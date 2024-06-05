@@ -24,6 +24,7 @@ git submodule update --init --recursive
 sdk env install
 ./mvnw clean verify
 ./mvnw clean compile exec:java -Dexec.mainClass="info.jab.jdk.ExceptionCounterExample" -Dexec.args="--enable-preview"
+./mvnw clean test -DTest=ExceptionFinderTest#should_group_exceptions_by_javaModule
 
 ./mvnw prettier:write
 ```

@@ -2,11 +2,22 @@ package info.jab.jdk;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import info.jab.jdk.ExceptionCounter.ExceptionTypes;
+import info.jab.jdk.ExceptionFinder.ExceptionDetail;
+import info.jab.jdk.ExceptionFinder.ExceptionTypes;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class ExceptionCounterTest {
+public class ExceptionFinderTest {
+
+    private static ExceptionFinder counter;
+
+    @BeforeAll
+    private static void before() {
+        counter = new ExceptionFinder();
+    }
 
     @Test
     void should_countExceptions() {
@@ -14,7 +25,6 @@ public class ExceptionCounterTest {
         var jdks = List.of("jdk22");
 
         //When
-        ExceptionCounter counter = new ExceptionCounter();
         var result = counter.countExceptions(jdks);
 
         //Then
@@ -30,12 +40,28 @@ public class ExceptionCounterTest {
         var jdks = List.of("jdk22");
 
         //When
-        ExceptionCounter counter = new ExceptionCounter();
         var result = counter.countExceptions(jdks);
 
         //Then
-        System.out.println("Results:");
         var javaBaseCounter = result.stream().filter(ed -> ed.javaModule().contains("base")).peek(System.out::println).count();
         assertThat(javaBaseCounter).isEqualTo(72L);
+    }
+
+    @Test
+    void should_group_exceptions_by_javaModule() {
+        //Given
+        var jdks = List.of("jdk22");
+
+        //When
+        var result = counter.countExceptions(jdks);
+
+        //Then
+        Map<String, Long> fieldNamesByModule = result.stream()
+            .collect(Collectors.groupingBy(ExceptionDetail::javaModule, Collectors.counting()));
+
+        // Print the results
+        for (Map.Entry<String, Long> entry : fieldNamesByModule.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
     }
 }
