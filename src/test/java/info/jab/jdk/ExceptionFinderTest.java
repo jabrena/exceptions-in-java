@@ -56,8 +56,7 @@ public class ExceptionFinderTest {
         var result = counter.countExceptions(jdks);
 
         //Then
-        Map<String, Long> fieldNamesByModule = result.stream()
-            .collect(Collectors.groupingBy(ExceptionDetail::javaModule, Collectors.counting()));
+        Map<String, Long> fieldNamesByModule = result.stream().collect(Collectors.groupingBy(ExceptionDetail::javaModule, Collectors.counting()));
 
         // Print the results
         for (Map.Entry<String, Long> entry : fieldNamesByModule.entrySet()) {
