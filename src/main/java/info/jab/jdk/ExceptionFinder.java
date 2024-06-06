@@ -97,38 +97,31 @@ public class ExceptionFinder {
             return new ExceptionDetail(jdk, type, exceptionName, javaModule);
         };
 
-        Function<List<String>, List<ExceptionDetail>> checkedExceptionsList = param -> {
-            logger.info("Retrieving Checked Exceptions");
-            return param
-                .stream()
-                .flatMap(getFilesFromPath)
-                .filter(Files::isRegularFile)
-                .filter(isExceptionFile)
-                .filter(not(isLocatedInTests))
-                .filter(containsCheckedExceptionPattern)
-                .map(String::valueOf)
-                .map(str -> toExceptionDetail.apply(str, ExceptionTypes.CheckedException))
-                //.peek(System.out::println)
-                .toList();
-        };
+        BiFunction<List<String>, ExceptionTypes, List<ExceptionDetail>> findExceptions = (param, typeEx) -> {
+            var stream = param.stream().flatMap(getFilesFromPath).filter(isExceptionFile).filter(not(isLocatedInTests));
 
-        Function<List<String>, List<ExceptionDetail>> uncheckedExceptionsList = param -> {
-            logger.info("Retrieving Unchecked Exceptions");
-            return param
-                .stream()
-                .flatMap(getFilesFromPath)
-                .filter(isExceptionFile)
-                .filter(not(isLocatedInTests))
-                .filter(containsUncheckedExceptionPattern)
-                .map(String::valueOf)
-                .map(str -> toExceptionDetail.apply(str, ExceptionTypes.UncheckedException))
-                //.peek(System.out::println)
-                .toList();
+            if (typeEx == ExceptionTypes.CheckedException) {
+                logger.info("Retrieving Checked Exceptions");
+
+                return stream
+                    .filter(containsCheckedExceptionPattern)
+                    .map(String::valueOf)
+                    .map(str -> toExceptionDetail.apply(str, ExceptionTypes.CheckedException))
+                    .toList();
+            } else {
+                logger.info("Retrieving Unchecked Exceptions");
+
+                return stream
+                    .filter(containsUncheckedExceptionPattern)
+                    .map(String::valueOf)
+                    .map(str -> toExceptionDetail.apply(str, ExceptionTypes.UncheckedException))
+                    .toList();
+            }
         };
 
         Function<List<String>, List<ExceptionDetail>> compute = param -> {
-            List<ExceptionDetail> counter1 = checkedExceptionsList.apply(param);
-            List<ExceptionDetail> counter2 = uncheckedExceptionsList.apply(param);
+            List<ExceptionDetail> counter1 = findExceptions.apply(param, ExceptionTypes.CheckedException);
+            List<ExceptionDetail> counter2 = findExceptions.apply(param, ExceptionTypes.UncheckedException);
             return Stream.concat(counter1.stream(), counter2.stream()).toList();
         };
 

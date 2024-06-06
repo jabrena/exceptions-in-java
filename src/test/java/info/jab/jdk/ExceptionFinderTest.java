@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import info.jab.jdk.ExceptionFinder.ExceptionDetail;
 import info.jab.jdk.ExceptionFinder.ExceptionTypes;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -58,9 +59,15 @@ public class ExceptionFinderTest {
         //Then
         Map<String, Long> fieldNamesByModule = result.stream().collect(Collectors.groupingBy(ExceptionDetail::javaModule, Collectors.counting()));
 
-        // Print the results
+        record ModuleNameCount(String moduleName, Long count) {}
+
+        List<ModuleNameCount> moduleNameList = new ArrayList<>(fieldNamesByModule.size());
+
         for (Map.Entry<String, Long> entry : fieldNamesByModule.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
+            moduleNameList.add(new ModuleNameCount(entry.getKey(), entry.getValue()));
         }
+
+        System.out.println("All exceptions:");
+        moduleNameList.stream().sorted((a, b) -> b.count().compareTo(a.count())).forEach(System.out::println);
     }
 }

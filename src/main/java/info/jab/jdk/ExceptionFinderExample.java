@@ -21,11 +21,8 @@ public class ExceptionFinderExample {
 
         ExceptionFinder counter = new ExceptionFinder();
 
-        showLatestData(counter);
-    }
-
-    private static void showLatestData(ExceptionFinder counter) {
         final List<String> jdk22 = List.of("jdk22");
         var jdk22Results = counter.countExceptions(jdk22);
+        jdk22Results.stream().forEach(System.out::println);
     }
 }
