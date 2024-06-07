@@ -2,11 +2,8 @@ package info.jab.jdk;
 
 import static java.util.function.Predicate.not;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import info.jab.jdk.utils.IOUtils;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
@@ -32,30 +29,14 @@ public class ExceptionFinder {
     private static final Pattern SLASH_PATTERN = Pattern.compile("/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)");
 
     public List<ExceptionDetail> countExceptions(List<String> paths) {
-        Function<Path, String> loadFileFromGitModule = param -> {
-            try {
-                return new String(Files.readAllBytes(param), StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                throw new RuntimeException(e.getLocalizedMessage(), e);
-            }
-        };
-
-        Function<String, Stream<Path>> getFilesFromPath = param -> {
-            try {
-                return Files.walk(Paths.get(param));
-            } catch (IOException e) {
-                throw new RuntimeException(e.getLocalizedMessage(), e);
-            }
-        };
-
         Predicate<Path> containsCheckedExceptionPattern = param -> {
             final String pattern = " extends Exception";
-            return loadFileFromGitModule.apply(param).contains(pattern);
+            return IOUtils.loadFileFromGitModule.apply(param).contains(pattern);
         };
 
         Predicate<Path> containsUncheckedExceptionPattern = param -> {
             final String pattern = " extends RuntimeException";
-            return loadFileFromGitModule.apply(param).contains(pattern);
+            return IOUtils.loadFileFromGitModule.apply(param).contains(pattern);
         };
 
         BiPredicate<Path, String> containsString = (path, pattern) -> path.toString().contains(pattern);
@@ -98,7 +79,7 @@ public class ExceptionFinder {
         };
 
         BiFunction<List<String>, ExceptionTypes, List<ExceptionDetail>> findExceptions = (param, typeEx) -> {
-            var stream = param.stream().flatMap(getFilesFromPath).filter(isExceptionFile).filter(not(isLocatedInTests));
+            var stream = param.stream().flatMap(IOUtils.getFilesFromPath).filter(isExceptionFile).filter(not(isLocatedInTests));
 
             if (typeEx == ExceptionTypes.CheckedException) {
                 logger.info("Retrieving Checked Exceptions");

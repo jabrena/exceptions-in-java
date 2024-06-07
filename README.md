@@ -24,7 +24,9 @@ git submodule update --init --recursive
 sdk env install
 ./mvnw clean verify
 ./mvnw clean compile exec:java -Dexec.mainClass="info.jab.jdk.ExceptionFinderExample"
-./mvnw clean test -DTest=ExceptionFinderTest#should_group_exceptions_by_javaModule
+./mvnw clean test -Dtest=ExceptionFinderTest#should_group_exceptions_by_javaModule
+./mvnw clean test -Dtest=ExceptionUsageTest
+
 
 ./mvnw prettier:write
 ```
@@ -58,6 +60,19 @@ sdk env install
 | JDK21 | 120                | 122                  | 2    |
 | JDK22 | 120                | 122                  | 2    |
 | JDK   | 120                | 121                  | 1    |
+
+## The Top 10 most used Exceptions in java.base module
+
+- CheckedException, IOException, 2837
+- UncheckedException, IllegalArgumentException, 2357
+- UncheckedException, NullPointerException, 1385
+- CheckedException, RuntimeException, 834
+- UncheckedException, UnsupportedOperationException, 747
+- UncheckedException, SecurityException, 695
+- UncheckedException, IllegalStateException, 664
+- UncheckedException, IndexOutOfBoundsException, 453
+- UncheckedException, ClassCastException, 381
+- CheckedException, InterruptedException, 306
 
 ## References
 
