@@ -9,6 +9,8 @@ import java.net.http.HttpResponse;
 
 public class Solution2 {
 
+    //Monolith approach, everything in the same method with different exceptions
+    //The developer understand what exceptions need to handle
     public static void main(String[] args) {
         String urlString = "https://www.google.com";
 

@@ -9,6 +9,8 @@ import java.util.function.Function;
 
 public class Solution4 {
 
+    //The business logic is splitted in parts
+    //Reducing the number of exceptions handling in the class
     public static void main(String[] args) {
         String urlString = "https://www.google.com";
 

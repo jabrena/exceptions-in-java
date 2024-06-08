@@ -27,7 +27,7 @@ sdk env install
 ./mvnw clean compile exec:java -Dexec.mainClass="info.jab.jdk.ExceptionFinderExample"
 ./mvnw clean compile exec:java -Dexec.mainClass="info.jab.problems.Solution1"
 ./mvnw clean test -Dtest=ExceptionFinderTest#should_group_exceptions_by_javaModule
-./mvnw clean test -Dtest=ExceptionUsageTest
+./mvnw clean test -Dtest=Solution1Test
 
 
 ./mvnw prettier:write

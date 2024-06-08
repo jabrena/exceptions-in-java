@@ -1,9 +1,9 @@
-package info.jab.jdk;
+package info.jab.ex;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import info.jab.jdk.ExceptionFinder.ExceptionDetail;
-import info.jab.jdk.ExceptionFinder.ExceptionTypes;
+import info.jab.ex.ExceptionFinder.ExceptionDetail;
+import info.jab.ex.ExceptionFinder.ExceptionTypes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

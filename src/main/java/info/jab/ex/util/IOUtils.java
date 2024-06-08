@@ -1,4 +1,4 @@
-package info.jab.jdk.utils;
+package info.jab.ex.util;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

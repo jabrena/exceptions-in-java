@@ -10,6 +10,8 @@ import java.util.function.Function;
 
 public class Solution3 {
 
+    //The business logic is splitted in parts
+    //Some functions or methods raise generic exceptions
     public static void main(String[] args) {
         String urlString = "https://www.google.com";
 
@@ -17,7 +19,7 @@ public class Solution3 {
             try {
                 return new URI(param);
             } catch (URISyntaxException e) {
-                throw new RuntimeException();
+                throw new RuntimeException("Bad parameter");
             }
         };
 

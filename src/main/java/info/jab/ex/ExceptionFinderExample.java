@@ -1,4 +1,4 @@
-package info.jab.jdk;
+package info.jab.ex;
 
 import com.github.lalyos.jfiglet.FigletFont;
 import java.io.IOException;
