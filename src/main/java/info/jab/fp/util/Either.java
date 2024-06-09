@@ -1,5 +1,6 @@
 package info.jab.fp.util;
 
+import java.util.NoSuchElementException;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -176,6 +177,14 @@ public sealed interface Either<L, R> permits Either.Left, Either.Right {
     }
 
     /**
+     * Returns the value if this is a Right, otherwise throws an exception.
+     *
+     * @return the Right value
+     * @throws NoSuchElementException if this is a Left
+     */
+    R get();
+
+    /**
      * A record representing the Left variant of an Either.
      *
      * @param <L> the type of the Left value
@@ -195,6 +204,11 @@ public sealed interface Either<L, R> permits Either.Left, Either.Right {
         @Override
         public boolean isRight() {
             return false;
+        }
+
+        @Override
+        public R get() {
+            throw new NoSuchElementException("No value present in Left");
         }
     }
 
@@ -218,6 +232,11 @@ public sealed interface Either<L, R> permits Either.Left, Either.Right {
         @Override
         public boolean isRight() {
             return true;
+        }
+
+        @Override
+        public R get() {
+            return value;
         }
     }
 }
