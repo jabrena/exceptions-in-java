@@ -3,4 +3,5 @@
 *.iml
 
 target/
+target_test-classes
 .vscode
