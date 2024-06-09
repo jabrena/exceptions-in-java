@@ -1,8 +1,8 @@
-package info.jab.jdk;
+package info.jab.ex;
 
 import static java.util.function.Predicate.not;
 
-import info.jab.jdk.utils.IOUtils;
+import info.jab.ex.util.IOUtils;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.BiPredicate;

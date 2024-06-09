@@ -8,13 +8,16 @@ Exceptions in Java are represented by objects from classes that extend the Throw
 
 Handling exceptions properly is important for writing robust and maintainable Java programs. It helps in dealing with unexpected situations effectively and ensures that the program does not crash or terminate abruptly.
 
-![](docs/exceptions.gif)
+## Problem statement
 
-Source: https://web.deu.edu.tr/doc/oreily/java/langref/ch09_04.htm 
+> Send a GET request to Google.com (https://www.google.com) and prints the HTML response.
 
-```bash
-java --list-modules
-```
+- [Solution 1](./src/main/java/info/jab/problems/Solution1.java)
+- [Solution 2](./src/main/java/info/jab/problems/Solution2.java)
+- [Solution 3](./src/main/java/info/jab/problems/Solution3.java)
+- [Solution 4](./src/main/java/info/jab/problems/Solution4.java)
+- [Solution 5](./src/main/java/info/jab/problems/Solution5.java)
+- [Solution 6](./src/main/java/info/jab/problems/Solution6.java)
 
 ## How to build in local?
 
@@ -24,17 +27,13 @@ git submodule update --init --recursive
 sdk env install
 ./mvnw clean verify
 ./mvnw clean compile exec:java -Dexec.mainClass="info.jab.jdk.ExceptionFinderExample"
+./mvnw clean compile exec:java -Dexec.mainClass="info.jab.problems.Solution1"
 ./mvnw clean test -Dtest=ExceptionFinderTest#should_group_exceptions_by_javaModule
-./mvnw clean test -Dtest=ExceptionUsageTest
+./mvnw clean test -Dtest=Solution1Test
 
 
 ./mvnw prettier:write
 ```
-
-## Exception inventory in Java 22
-
-- [Checked Exceptions in Java 22](./docs/jdk22-checked-exceptions.md)
-- [Unchecked Exceptions in Java 22](./docs/jdk22-unchecked-exceptions.md)
 
 ## Exceptions evolution
 
