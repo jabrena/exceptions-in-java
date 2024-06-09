@@ -6,14 +6,18 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.function.Function;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class Solution4 {
+public class Solution4 implements ISolution {
+
+    private static final Logger logger = LoggerFactory.getLogger(Solution4.class);
 
     //The business logic is splitted in parts
     //Reducing the number of exceptions handling in the class
-    public static void main(String[] args) {
-        String urlString = "https://www.google.com";
-
+    @Override
+    public String extractHTML(String address) {
+        //Over engineering example
         Function<String, URI> toUri = param -> {
             return URI.create(param);
         };
@@ -24,13 +28,12 @@ public class Solution4 {
                 HttpRequest request = HttpRequest.newBuilder().uri(param).GET().build();
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
                 return response.body();
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException();
+            } catch (IOException | InterruptedException | IllegalArgumentException ex) {
+                logger.warn(ex.getLocalizedMessage(), ex);
+                return "";
             }
         };
 
-        var result = toUri.andThen(toHTML).apply(urlString);
-
-        System.out.println(result);
+        return toUri.andThen(toHTML).apply(address);
     }
 }

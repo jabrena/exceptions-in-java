@@ -16,6 +16,8 @@ Handling exceptions properly is important for writing robust and maintainable Ja
 - [Solution 2](./src/main/java/info/jab/problems/Solution2.java)
 - [Solution 3](./src/main/java/info/jab/problems/Solution3.java)
 - [Solution 4](./src/main/java/info/jab/problems/Solution4.java)
+- [Solution 5](./src/main/java/info/jab/problems/Solution5.java)
+- [Solution 6](./src/main/java/info/jab/problems/Solution6.java)
 
 ## How to build in local?
 
@@ -32,11 +34,6 @@ sdk env install
 
 ./mvnw prettier:write
 ```
-
-## Exception inventory in Java 22
-
-- [Checked Exceptions in Java 22](./docs/jdk22-checked-exceptions.md)
-- [Unchecked Exceptions in Java 22](./docs/jdk22-unchecked-exceptions.md)
 
 ## Exceptions evolution
 

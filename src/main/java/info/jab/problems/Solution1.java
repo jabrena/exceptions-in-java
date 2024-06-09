@@ -7,11 +7,12 @@ import java.net.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Solution1 {
+public class Solution1 implements ISolution {
 
     private static final Logger logger = LoggerFactory.getLogger(Solution1.class);
 
     //Monolith approach, everything in the same method with one top Exception class
+    @Override
     public String extractHTML(String address) {
         try {
             HttpClient client = HttpClient.newHttpClient();

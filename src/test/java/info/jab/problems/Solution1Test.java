@@ -9,9 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class Solution1Test {
 
@@ -42,26 +45,53 @@ public class Solution1Test {
         wireMockServer.stop();
     }
 
-    @Test
-    void should_work() {
+    // @formatter:off
+    static Stream<ISolution> provideSolutions() {
+        return Stream.of(
+            new Solution1(), 
+            new Solution2(), 
+            new Solution3(), 
+            new Solution4(),
+            new Solution5(), 
+            new Solution6());
+    }
+
+    // @formatter:on
+
+    @ParameterizedTest
+    @MethodSource("provideSolutions")
+    void should_work(ISolution solution) {
         //Given
         String address = "http://localhost:" + wireMockServer.port();
 
         //When
-        Solution1 solution = new Solution1();
         var result = solution.extractHTML(address);
 
         //Then
         assertThat(result).isNotEmpty();
+        assertThat(result).isEqualTo("<html><body>Hello, World!</body></html>");
     }
 
-    @Test
-    void should_not_work() {
+    @ParameterizedTest
+    @MethodSource("provideSolutions")
+    void should_not_work(ISolution solution) {
         //Given
         String address = "https://www.google999.com";
 
         //When
-        Solution1 solution = new Solution1();
+        var result = solution.extractHTML(address);
+
+        //Then
+        assertThat(result).isEmpty();
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideSolutions")
+    void should_not_work_with_bad_adddress(ISolution solution) {
+        //Given
+        String address = "https://www.localhost:80808.com";
+
+        //When
         var result = solution.extractHTML(address);
 
         //Then
