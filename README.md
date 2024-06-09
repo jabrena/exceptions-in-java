@@ -66,7 +66,7 @@ public class Solution6 implements ISolution {
 }
 ```
 
-### Who is using Either in Github?
+### Who is using Either in Github?
 
 - https://github.com/SeleniumHQ/selenium/
 - https://github.com/bazelbuild/bazel/
