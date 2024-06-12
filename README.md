@@ -8,72 +8,6 @@ Exceptions in Java are represented by objects from classes that extend the Throw
 
 Handling exceptions properly is important for writing robust and maintainable Java programs. It helps in dealing with unexpected situations effectively and ensures that the program does not crash or terminate abruptly.
 
-## Problem statement
-
-> Send a GET request to Google.com (https://www.google.com) and prints the HTML response.
-
-- [Solution 1](./src/main/java/info/jab/problems/Solution1.java)
-- [Solution 2](./src/main/java/info/jab/problems/Solution2.java)
-- [Solution 3](./src/main/java/info/jab/problems/Solution3.java)
-- [Solution 4](./src/main/java/info/jab/problems/Solution4.java)
-- [Solution 5](./src/main/java/info/jab/problems/Solution5.java)
-- [Solution 6](./src/main/java/info/jab/problems/Solution6.java)
-
-## Either<L,R>
-
-*Either<L, R>* is a commonly used data type that encapsulates a value of one of two possible types. It represents a value that can be either an "error" (left) or a "success" (right). This is particularly useful for error handling and avoiding exceptions.
-
-### Example:
-
-```java
-public class Solution6 implements ISolution {
-
-    private static final Logger logger = LoggerFactory.getLogger(Solution4.class);
-
-    sealed interface ConnectionProblem permits InvalidURI, InvalidConnection {}
-
-    record InvalidURI() implements ConnectionProblem {}
-
-    record InvalidConnection() implements ConnectionProblem {}
-
-    //The business logic is splitted in parts
-    //Reducing the number of exceptions handling in the class
-    @Override
-    public String extractHTML(String address) {
-        //Error handling handling in the origin
-        Function<String, Either<ConnectionProblem, String>> toHTML = param -> {
-            try {
-                URI uri = new URI(param);
-                HttpClient client = HttpClient.newHttpClient();
-                HttpRequest request = HttpRequest.newBuilder().uri(uri).GET().build();
-                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                return Either.right(response.body());
-            } catch (URISyntaxException | IllegalArgumentException ex) {
-                logger.warn(ex.getLocalizedMessage(), ex);
-                return Either.left(new InvalidURI());
-            } catch (IOException | InterruptedException ex) {
-                logger.warn(ex.getLocalizedMessage(), ex);
-                return Either.left(new InvalidConnection());
-            }
-        };
-
-        var result = toHTML.apply(address);
-        return switch (result) {
-            case Either.Right<ConnectionProblem, String> right -> right.value();
-            default -> "";
-        };
-    }
-}
-```
-
-### Who is using Either in Github?
-
-- https://github.com/SeleniumHQ/selenium/
-- https://github.com/bazelbuild/bazel/
-- https://github.com/strimzi/strimzi-kafka-operator/
-- https://github.com/camunda/camunda/
-- https://github.com/awslabs/dqdl/
-
 ## How to build in local?
 
 ```bash
@@ -82,9 +16,7 @@ git submodule update --init --recursive
 sdk env install
 ./mvnw clean verify
 ./mvnw clean compile exec:java -Dexec.mainClass="info.jab.jdk.ExceptionFinderExample"
-./mvnw clean compile exec:java -Dexec.mainClass="info.jab.problems.Solution1"
 ./mvnw clean test -Dtest=ExceptionFinderTest#should_group_exceptions_by_javaModule
-./mvnw clean test -Dtest=Solution1Test
 
 
 ./mvnw prettier:write
